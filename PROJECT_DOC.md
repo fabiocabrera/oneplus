@@ -6,12 +6,12 @@ Nome de trabalho: **OnePlus**
 Objetivo inicial: construir um sistema web profissional para automacao de envio de boletos de planos de saude via WhatsApp, com painel de controle, historico completo, download automatizado em portais de seguradoras e envio automatico D-10 antes do vencimento.
 
 ## Estado atual
-- Fase atual: **frontend importado, backend ainda nao criado**.
-- Estrutura real confirmada em 2026-06-24: kit documental, repositorio Git local sem commits, `deploy/production.md` e `frontend/` importado de `https://github.com/fabiocabrera/soneplus-v2.git`.
+- Fase atual: **frontend publicado em producao, backend ainda nao criado**.
+- Estrutura real confirmada em 2026-06-24: kit documental, repositorio Git publicado em `https://github.com/fabiocabrera/oneplus`, `deploy/production.md` e `frontend/` importado de `https://github.com/fabiocabrera/soneplus-v2.git`.
 - Produto definido a partir do briefing: automacao de boletos de planos de saude com painel administrativo, Playwright, PostgreSQL, WhatsApp Meta Cloud API e execucao agendada.
 - Stack inicial definida: backend Python/FastAPI, frontend React/TypeScript/Vite, PostgreSQL, Playwright Python, APScheduler, storage local de PDFs, Docker e deploy padrao GitHub + EasyPanel + Cloudflare.
-- Ainda nao ha dominio, repositorio remoto do workspace OnePlus, backend, banco, testes backend ou integracoes implementadas.
-- Producao inicial definida: `https://oneplus.cabrerahub.com`, via GitHub `fabiocabrera/oneplus`, EasyPanel projeto `spa360`, app `oneplus`.
+- Producao inicial publicada: `https://oneplus.cabrerahub.com`, via GitHub `fabiocabrera/oneplus`, EasyPanel projeto `spa360`, app `oneplus`, Cloudflare `cabrerahub.com`.
+- Ainda nao ha backend, banco, testes backend ou integracoes implementadas.
 - O kit inicial foi criado a partir da disciplina operacional do FinOS e dos padroes de deploy/integracao do Spa360.
 
 ## Metodologia CabrerAI Connect
@@ -23,7 +23,7 @@ O projeto deve operar com estes pilares:
 - `AGENT_ROUTING.md`: escolha consultiva de agente/modelo por entregavel, dominio e risco.
 - `Protocolo-V.L.A.E.G.md`: modo opcional para automacoes, agentes, webhooks, ETL e payload estruturado.
 - `INTEGRATIONS_AGENT.md`: regras para conexoes externas sem expor credenciais.
-- `deploy/production.md`: modelo de producao antes do primeiro deploy.
+- `deploy/production.md`: fonte operacional do deploy de producao.
 - `PROMPTS.md`: prompts curtos para retomada e operacao.
 - `BOOTSTRAP-CHECKLIST.md`: checklist para transformar o kit em projeto real.
 
@@ -49,7 +49,7 @@ Stack escolhida para o scaffold tecnico:
 - WhatsApp: Meta Cloud API oficial.
 - Frontend: React + TypeScript + Vite.
 - Deploy/runtime: GitHub + EasyPanel + Docker + Cloudflare, seguindo o padrao Spa360/FinOS.
-- Deploy inicial: frontend em `https://oneplus.cabrerahub.com`, build path `/frontend`, `frontend/Dockerfile`, porta interna `3000`.
+- Deploy inicial: frontend em `https://oneplus.cabrerahub.com`, build path `/frontend`, `frontend/Dockerfile`, porta interna `3000`, DNS Cloudflare para o IP do EasyPanel.
 
 Frontend real importado:
 
@@ -64,9 +64,7 @@ Ainda nao existe no workspace atual:
 - Sem `backend/`.
 - Sem `database/`, `supabase/` ou `migrations/`.
 - Sem `scripts/` ou `tools/`.
-- Sem `.github/workflows/`.
-- Sem `.env.example`.
-- Sem `backend/Dockerfile` ou `frontend/Dockerfile`.
+- Sem `backend/Dockerfile`.
 
 ## Modulos previstos
 - Cadastro de clientes.
@@ -84,9 +82,16 @@ Ainda nao existe no workspace atual:
 ```text
 OnePlus/
   .git/
+  .github/
+    workflows/
+      deploy-production.yml
+  .env.example
+  .gitignore
   deploy/
     production.md
   frontend/
+    Dockerfile
+    .dockerignore
     src/
     package.json
     bun.lock
@@ -127,22 +132,9 @@ OnePlus/
       routes/
       components/
       lib/
-  backend/
-    api/
-      routes/
-      models/
-      services/
-      automation/
-        insurers/
-    scheduler/
-    storage/
-    alembic/
   backend/Dockerfile
-  frontend/Dockerfile
-  .env.example
   deploy/
     production.md
-  .github/workflows/       # opcional, apos repo remoto
   AGENTS.md
   AGENT_ROUTING.md
   PROJECT_DOC.md
@@ -155,25 +147,26 @@ OnePlus/
 ```
 
 ## Proximos passos
-1. Validar o frontend importado com install/build/lint.
-2. Confirmar deploy publico em `https://oneplus.cabrerahub.com`.
-3. Criar `backend/`, `.env.example` backend e `backend/Dockerfile`.
-4. Definir servicos futuros de API/banco no EasyPanel.
-5. Atualizar `VITE_API_URL` quando a API existir.
-6. Criar models e migrations Alembic.
-7. Criar CRUD inicial de clientes e credenciais.
-8. Implementar primeiro modulo Playwright da Porto Seguro com VLAEG ativo.
-9. Implementar envio WhatsApp e logs operacionais.
+1. Criar `backend/`, `.env.example` backend e `backend/Dockerfile`.
+2. Definir servicos futuros de API/banco no EasyPanel.
+3. Atualizar `VITE_API_URL` quando a API existir.
+4. Criar models e migrations Alembic.
+5. Criar CRUD inicial de clientes e credenciais.
+6. Implementar primeiro modulo Playwright da Porto Seguro com VLAEG ativo.
+7. Implementar envio WhatsApp e logs operacionais.
 
 ## Validacao do bootstrap
 - Inventario real executado com `rg --files` excluindo caches, builds e logs.
-- Verificado que nao ha remoto Git configurado com `git remote -v`.
-- Verificado que nao ha commits ainda com `git status --short --branch`.
+- Repositorio remoto configurado em `https://github.com/fabiocabrera/oneplus`.
+- Commit inicial publicado em `main`.
 - Frontend importado em `frontend/` a partir de `fabiocabrera/soneplus-v2`.
 - Dependencias frontend instaladas com `bun install`.
 - Build frontend validado com `bun run build`.
 - Lint frontend validado com `bun run lint`; restam 6 warnings de Fast Refresh em componentes UI, sem erros.
 - `frontend/dist/` e `frontend/node_modules/` estao ignorados pelo `.gitignore` do frontend.
+- GitHub Actions `production-build` validado com sucesso.
+- EasyPanel publicou o app `spa360/oneplus`.
+- Smoke publico validado em `https://oneplus.cabrerahub.com` e `https://oneplus.cabrerahub.com/login` com HTTP 200.
 
 ## Avaliacao VLAEG
 VLAEG se aplica ao projeto por envolver automacao recorrente, Playwright em portais externos, credenciais sensiveis, Meta Cloud API, armazenamento de PDFs, agendamento e payloads operacionais para WhatsApp. Ele nao foi executado nesta decisao de stack, mas deve ser ativado antes de implementar os fluxos reais de automacao, integracao externa e envio.

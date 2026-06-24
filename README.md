@@ -17,7 +17,7 @@ Este repositorio comeca pelo kit operacional: agentes, roteamento, contratos, VL
 - `TEMPLATE-*.md` - templates reutilizaveis para proximos projetos.
 
 ## Estado atual
-Fase: frontend importado, backend ainda nao criado.
+Fase: frontend publicado em producao, backend ainda nao criado.
 
 Stack escolhida:
 
@@ -34,16 +34,17 @@ Decisao frontend: usar **Vite**, nao Next.js. O sistema e um painel administrati
 
 Estrutura real confirmada em 2026-06-24:
 
-- existe repositorio Git local, ainda sem commits;
-- nao ha remoto Git configurado;
+- existe repositorio Git em `https://github.com/fabiocabrera/oneplus`;
+- branch `main` publicada e validada pelo GitHub Actions;
 - existe `deploy/production.md`;
 - existe `frontend/` importado de `https://github.com/fabiocabrera/soneplus-v2.git`;
 - nao existe `backend/`;
 - nao existe `database/`, `supabase/` ou `migrations/`;
 - nao existe `scripts/` ou `tools/`;
-- nao existe `.github/workflows/`;
-- nao existe `.env.example`;
+- existe `.github/workflows/deploy-production.yml`;
+- existe `.env.example`;
 - existem manifests do frontend em `frontend/package.json`, `frontend/bun.lock`, `frontend/vite.config.ts` e `frontend/tsconfig.json`;
+- existe `frontend/Dockerfile` para o deploy inicial;
 - ainda nao existem Dockerfiles ou manifests backend.
 
 ## Comandos reais hoje
@@ -95,4 +96,4 @@ Nunca versionar:
 - exports com dados sensiveis sem decisao explicita.
 
 ## Proximo passo recomendado
-Validar o frontend importado e depois criar `backend/`, `.env.example`, Dockerfiles e contratos detalhados da API.
+Criar `backend/`, `backend/Dockerfile`, variaveis backend e contratos detalhados da API.

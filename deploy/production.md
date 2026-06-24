@@ -126,7 +126,7 @@ Registros esperados:
 
 | Tipo | Nome | Conteudo | Proxy | Uso |
 | --- | --- | --- | --- | --- |
-| A | `oneplus` | `<VPS_IP_DO_EASYPANEL>` | Com proxy ou conforme TLS do EasyPanel | Frontend publico |
+| A | `oneplus` | `31.97.23.13` | Ativo | Frontend publico |
 
 Regras:
 - Cloudflare e a fonte do DNS publico.
@@ -157,7 +157,6 @@ Invoke-WebRequest https://oneplus.cabrerahub.com/login -UseBasicParsing
 
 ## Pendencias
 
-- Confirmar DNS `oneplus.cabrerahub.com` no Cloudflare.
-- Confirmar no EasyPanel se o app `oneplus` aponta para `fabiocabrera/oneplus`, branch `main`, build path `/frontend`, file `Dockerfile`, porta `3000`.
 - Criar backend/API em fase posterior.
 - Criar banco em fase posterior.
+- Criar servicos EasyPanel separados para API/banco quando existirem.
