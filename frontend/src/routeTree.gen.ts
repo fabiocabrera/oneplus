@@ -14,6 +14,7 @@ import { Route as AppRouteImport } from './routes/_app'
 import { Route as AppIndexRouteImport } from './routes/_app.index'
 import { Route as AppWhatsappRouteImport } from './routes/_app.whatsapp'
 import { Route as AppSeguradorasRouteImport } from './routes/_app.seguradoras'
+import { Route as AppPlanosRouteImport } from './routes/_app.planos'
 import { Route as AppLogsRouteImport } from './routes/_app.logs'
 import { Route as AppHistoricoRouteImport } from './routes/_app.historico'
 import { Route as AppClientesRouteImport } from './routes/_app.clientes'
@@ -42,6 +43,11 @@ const AppWhatsappRoute = AppWhatsappRouteImport.update({
 const AppSeguradorasRoute = AppSeguradorasRouteImport.update({
   id: '/seguradoras',
   path: '/seguradoras',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPlanosRoute = AppPlanosRouteImport.update({
+  id: '/planos',
+  path: '/planos',
   getParentRoute: () => AppRoute,
 } as any)
 const AppLogsRoute = AppLogsRouteImport.update({
@@ -77,6 +83,7 @@ export interface FileRoutesByFullPath {
   '/clientes': typeof AppClientesRouteWithChildren
   '/historico': typeof AppHistoricoRoute
   '/logs': typeof AppLogsRoute
+  '/planos': typeof AppPlanosRoute
   '/seguradoras': typeof AppSeguradorasRoute
   '/whatsapp': typeof AppWhatsappRoute
   '/clientes/$id': typeof AppClientesIdRoute
@@ -87,6 +94,7 @@ export interface FileRoutesByTo {
   '/clientes': typeof AppClientesRouteWithChildren
   '/historico': typeof AppHistoricoRoute
   '/logs': typeof AppLogsRoute
+  '/planos': typeof AppPlanosRoute
   '/seguradoras': typeof AppSeguradorasRoute
   '/whatsapp': typeof AppWhatsappRoute
   '/': typeof AppIndexRoute
@@ -100,6 +108,7 @@ export interface FileRoutesById {
   '/_app/clientes': typeof AppClientesRouteWithChildren
   '/_app/historico': typeof AppHistoricoRoute
   '/_app/logs': typeof AppLogsRoute
+  '/_app/planos': typeof AppPlanosRoute
   '/_app/seguradoras': typeof AppSeguradorasRoute
   '/_app/whatsapp': typeof AppWhatsappRoute
   '/_app/': typeof AppIndexRoute
@@ -114,6 +123,7 @@ export interface FileRouteTypes {
     | '/clientes'
     | '/historico'
     | '/logs'
+    | '/planos'
     | '/seguradoras'
     | '/whatsapp'
     | '/clientes/$id'
@@ -124,6 +134,7 @@ export interface FileRouteTypes {
     | '/clientes'
     | '/historico'
     | '/logs'
+    | '/planos'
     | '/seguradoras'
     | '/whatsapp'
     | '/'
@@ -136,6 +147,7 @@ export interface FileRouteTypes {
     | '/_app/clientes'
     | '/_app/historico'
     | '/_app/logs'
+    | '/_app/planos'
     | '/_app/seguradoras'
     | '/_app/whatsapp'
     | '/_app/'
@@ -182,6 +194,13 @@ declare module '@tanstack/react-router' {
       path: '/seguradoras'
       fullPath: '/seguradoras'
       preLoaderRoute: typeof AppSeguradorasRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/planos': {
+      id: '/_app/planos'
+      path: '/planos'
+      fullPath: '/planos'
+      preLoaderRoute: typeof AppPlanosRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/logs': {
@@ -239,6 +258,7 @@ interface AppRouteChildren {
   AppClientesRoute: typeof AppClientesRouteWithChildren
   AppHistoricoRoute: typeof AppHistoricoRoute
   AppLogsRoute: typeof AppLogsRoute
+  AppPlanosRoute: typeof AppPlanosRoute
   AppSeguradorasRoute: typeof AppSeguradorasRoute
   AppWhatsappRoute: typeof AppWhatsappRoute
   AppIndexRoute: typeof AppIndexRoute
@@ -249,6 +269,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppClientesRoute: AppClientesRouteWithChildren,
   AppHistoricoRoute: AppHistoricoRoute,
   AppLogsRoute: AppLogsRoute,
+  AppPlanosRoute: AppPlanosRoute,
   AppSeguradorasRoute: AppSeguradorasRoute,
   AppWhatsappRoute: AppWhatsappRoute,
   AppIndexRoute: AppIndexRoute,

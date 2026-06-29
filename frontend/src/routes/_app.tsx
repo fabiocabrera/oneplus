@@ -13,6 +13,7 @@ import {
   Settings,
   LogOut,
   ChevronDown,
+  CreditCard,
 } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { type ReactNode } from "react";
@@ -30,6 +31,7 @@ const nav: NavItem[] = [
   { to: "/automacoes", label: "Automações", icon: Bot },
   { to: "/whatsapp", label: "WhatsApp", icon: MessageCircle },
   { to: "/logs", label: "Logs do sistema", icon: ScrollText },
+  { to: "/planos", label: "Planos", icon: CreditCard },
 ];
 
 const titles: Record<string, { title: string; sub: string }> = {
@@ -43,6 +45,7 @@ const titles: Record<string, { title: string; sub: string }> = {
   "/automacoes": { title: "Automações", sub: "Execução diária do robô de coleta" },
   "/whatsapp": { title: "WhatsApp · Meta Cloud API", sub: "Configuração de envios e templates" },
   "/logs": { title: "Logs do sistema", sub: "Eventos técnicos da plataforma" },
+  "/planos": { title: "Planos e assinatura", sub: "Escolha o plano ideal para sua corretora" },
 };
 
 function AppLayout() {
